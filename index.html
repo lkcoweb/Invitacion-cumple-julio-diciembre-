@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Retro Party – LK.co</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--pink:#ff2d78;--cyan:#00f5ff;--yellow:#ffe600;--green:#39ff14;--purple:#bf00ff;--gold:#ffd700;--dark:#0a0a0f}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:#fff;font-family:'Rajdhani',sans-serif;overflow-x:hidden;min-height:100vh}
+#stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite alternate;opacity:0}
+@keyframes twinkle{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1.2)}}
+.floaters{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.floater{position:absolute;font-size:clamp(1.2rem,3vw,2.2rem);animation:floatUp var(--ft,12s) linear infinite;opacity:.15;bottom:-60px}
+@keyframes floatUp{0%{transform:translateY(0) rotate(0deg);opacity:.15}80%{opacity:.15}100%{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+.page{position:relative;z-index:2;max-width:660px;margin:0 auto;padding:0 16px 60px}
+.hero{text-align:center;padding:52px 0 28px}
+.logo-img{width:180px;height:auto;margin:0 auto 20px;display:block;filter:drop-shadow(0 0 20px rgba(255,255,255,.3))}
+.badge{display:inline-block;background:linear-gradient(135deg,var(--pink),var(--purple));color:#fff;font-family:'Orbitron',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:6px 18px;border-radius:40px;margin-bottom:20px;box-shadow:0 0 18px var(--pink);animation:badgePulse 2.4s ease-in-out infinite}
+@keyframes badgePulse{0%,100%{box-shadow:0 0 18px var(--pink)}50%{box-shadow:0 0 36px var(--pink),0 0 60px var(--purple)}}
+.disco{font-size:clamp(3.5rem,10vw,5.5rem);display:block;margin:0 auto 10px;animation:discoSpin 3s ease-in-out infinite;filter:drop-shadow(0 0 16px var(--cyan))}
+@keyframes discoSpin{0%{transform:rotate(-8deg) scale(1)}50%{transform:rotate(8deg) scale(1.08)}100%{transform:rotate(-8deg) scale(1)}}
+.headline{font-family:'Press Start 2P',monospace;font-size:clamp(1.8rem,7vw,3rem);line-height:1.25;background:linear-gradient(90deg,var(--yellow),var(--pink),var(--cyan),var(--green));background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradShift 4s ease infinite;margin-bottom:6px}
+@keyframes gradShift{0%{background-position:0%}50%{background-position:100%}100%{background-position:0%}}
+.subhead{font-family:'Orbitron',sans-serif;font-size:clamp(.8rem,2.2vw,1.05rem);color:var(--cyan);letter-spacing:.22em;text-transform:uppercase;margin-bottom:4px;text-shadow:0 0 10px var(--cyan)}
+.decades{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px 0 26px}
+.chip{font-family:'Orbitron',sans-serif;font-size:.72rem;font-weight:700;padding:6px 16px;border-radius:30px;border:2px solid;letter-spacing:.12em;animation:chipGlow 2.6s ease-in-out infinite alternate}
+.d70{color:var(--gold);border-color:var(--gold);animation-delay:0s}
+.d80{color:var(--pink);border-color:var(--pink);animation-delay:.4s}
+.d90{color:var(--cyan);border-color:var(--cyan);animation-delay:.8s}
+@keyframes chipGlow{from{box-shadow:0 0 4px currentColor}to{box-shadow:0 0 16px currentColor,0 0 30px currentColor}}
+.intro{color:rgba(255,255,255,.55);font-size:.95rem;line-height:1.65;max-width:400px;margin:0 auto}
+.intro strong{color:#fff}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--pink),var(--cyan),transparent);margin:28px 0;opacity:.5}
+.card{background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:26px 22px;margin-bottom:18px;backdrop-filter:blur(6px);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow));border-radius:20px 20px 0 0}
+.card-title{font-family:'Orbitron',sans-serif;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--yellow);margin-bottom:18px;text-shadow:0 0 8px var(--yellow)}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:380px){.info-grid{grid-template-columns:1fr}}
+.info-item{display:flex;align-items:flex-start;gap:12px}
+.info-icon{font-size:1.4rem;flex-shrink:0;line-height:1}
+.info-label{font-size:.65rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.4);margin-bottom:3px}
+.info-value{font-family:'Orbitron',sans-serif;font-size:.88rem;font-weight:700;color:#fff;line-height:1.3}
+.accent{color:var(--cyan);text-shadow:0 0 8px var(--cyan)}
+.dress-card{background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:26px 22px;margin-bottom:18px;backdrop-filter:blur(6px);position:relative;overflow:hidden;text-align:center}
+.dress-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--cyan),var(--yellow));border-radius:20px 20px 0 0}
+.dress-card .card-title{text-align:center}
+.dress-card p{color:rgba(255,255,255,.65);font-size:1.05rem;line-height:1.7;margin-top:8px}
+.dress-card .trophy{font-size:3rem;margin:12px 0;display:block;filter:drop-shadow(0 0 12px var(--gold))}
+.cta{text-align:center;padding:8px 0 0}
+.cta-text{font-family:'Orbitron',sans-serif;font-size:clamp(1rem,3.5vw,1.4rem);font-weight:900;background:linear-gradient(90deg,var(--yellow),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px}
+.cta-sub{color:rgba(255,255,255,.45);font-size:.9rem}
+.footer{text-align:center;margin-top:38px;padding-top:22px;border-top:1px solid rgba(255,255,255,.08)}
+.footer-logo{font-family:'Orbitron',sans-serif;font-size:1.05rem;font-weight:900;color:var(--cyan);text-shadow:0 0 12px var(--cyan);letter-spacing:.2em}
+.footer-tag{font-size:.78rem;color:rgba(255,255,255,.3);margin-top:4px}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);pointer-events:none;z-index:9999}
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div class="floaters" id="floaters"></div>
+<div class="page">
+<section class="hero">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAABkCAYAAAA8AQ3AAAAACXBIWXMAAAsTAAALEwEAmpwYAAAF8mlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgOS4xLWMwMDIgNzkuZjM1NGVmYzcsIDIwMjMvMTEvMDktMTI6MDU6NTMgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCAyNS4xMSAoV2luZG93cykiIHhtcDpDcmVhdGVEYXRlPSIyMDI1LTAyLTE4VDE4OjQ5OjM1LTA2OjAwIiB4bXA6TW9kaWZ5RGF0ZT0iMjAyNS0wMi0xOFQxODo1MDoxNy0wNjowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyNS0wMi0xOFQxODo1MDoxNy0wNjowMCIgZGM6Zm9ybWF0PSJpbWFnZS9wbmciIHBob3Rvc2hvcDpDb2xvck1vZGU9IjMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6YmU3YjJjMGUtNzU5NS1hZTQ5LTg0YzItMmQ3ZjJiOTVmZjEyIiB4bXBNTTpEb2N1bWVudElE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fb/Hty+l+3bvm9mLf/n/cQf9f90/39B72/0e7z/s9X3+3y7/H6F3v+1s95fz//P+H/TP/w8d/3/B/h/0/4e+1/8vC/e/uOffcv7f2v8Cet/vP+/p/2Xe/4v70zl9e/z5/vv5///n+ZecwOfzx/nW9v9V+n/D/md2f7n/ve19/iv+p3P89X/Nv0/q/rP+ZwDczvf9l91/M0BO7/37+/+u/l/x+98f/BLUf+T/vH3//j//8v9+/wOZd//xqJ31/4N+f/CXZv1frf87+f+F58Pv/v/3fzz/P8v/f/Kf1v+f/b94ZXf9H7EXe//Hrv/F8//t/j/u/+f3/3v+/h7/f13/t+v/Hc/vvN9f3/+P9P/Wfq/b/3/v/5f1//P9/3L/L+f1f+78VQT/f/38t/u/fv+/v/8vvv//h/xO//cqM/95/b+p+y/o///zfxv/d+r/3/f/+/v/9/x/+v8vdv+0+t/of07/L//8H/r/k+fD7/7v1v8v4P9t/v+e//9qd//v+/81Aa3P1+Hf//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//3f//0P8B/qT6dGHlD8JgAAAABJRU5ErkJggg==" alt="LK.co" class="logo-img">
+<span class="badge">✦ Celebración Especial ✦</span>
+<span class="disco">🪩</span>
+<h1 class="headline">RETRO<br>PARTY</h1>
+<p class="subhead">LK.co Honduras</p>
+<div class="decades">
+<span class="chip d70">70s</span>
+<span class="chip d80">80s</span>
+<span class="chip d90">90s</span>
+</div>
+<p class="intro">¡Es hora de viajar en el tiempo! Celebramos a nuestros <strong>cumpleañeros de julio-diciembre</strong>.</p>
+</section>
+<div class="divider"></div>
+<div class="card">
+<p class="card-title">⚡ Detalles del Evento</p>
+<div class="info-grid">
+<div class="info-item"><span class="info-icon">📅</span><div><div class="info-label">Fecha</div><div class="info-value accent">Viernes 20 de febrero de 2026</div></div></div>
+<div class="info-item"><span class="info-icon">⏰</span><div><div class="info-label">Hora</div><div class="info-value">2:00 PM</div></div></div>
+<div class="info-item"><span class="info-icon">📍</span><div><div class="info-label">Lugar</div><div class="info-value">Área del jardín</div></div></div>
+<div class="info-item"><span class="info-icon">🎉</span><div><div class="info-label">Celebrados</div><div class="info-value">Julio – Diciembre</div></div></div>
+</div>
+</div>
+<div class="dress-card">
+<p class="card-title">👑 Mejor Outfit de la Década</p>
+<span class="trophy">🏆</span>
+<p>El mejor outfit de la década será premiado.</p>
+</div>
+<div class="divider"></div>
+<div class="cta">
+<p class="cta-text">¡TE ESPERAMOS!</p>
+<p class="cta-sub">Viajamos juntos en el tiempo 🕰️</p>
+</div>
+<div class="footer">
+<div class="footer-logo">LK.CO</div>
+<div class="footer-tag">Honduras · Cumpleañeros Julio – Diciembre</div>
+</div>
+</div>
+<script>
+const starsEl=document.getElementById('stars');
+for(let i=0;i<120;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*3+1;const cols=['#fff','#ff2d78','#00f5ff','#ffe600','#bf00ff','#ffd700'];s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${cols[Math.floor(Math.random()*cols.length)]};--dur:${(Math.random()*3+2).toFixed(1)}s;animation-delay:${(Math.random()*4).toFixed(1)}s`;starsEl.appendChild(s)}
+const icons=['🎵','🎶','💿','📼','🕹️','🎸','🪩','⚡','🌟','🎤','🥁','📻','🕺','💃','🎹'];
+const floatersEl=document.getElementById('floaters');
+for(let i=0;i<16;i++){const f=document.createElement('div');f.className='floater';f.textContent=icons[Math.floor(Math.random()*icons.length)];f.style.cssText=`left:${Math.random()*100}%;--ft:${(Math.random()*12+8).toFixed(1)}s;animation-delay:${(Math.random()*12).toFixed(1)}s`;floatersEl.appendChild(f)}
+</script>
+</body>
+</html>
